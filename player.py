@@ -1,4 +1,4 @@
-import cards
+import card
 
 class player:
     def __init__(self, id, role, cards = [], hero = None, life = 0):
