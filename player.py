@@ -13,11 +13,14 @@ class player:
 
     def disclose_role(self):
         print(f"Player {self.id}''s role is {self.role}")
+        print("Player", self.id, "''s role is ", self.role)
 
 
 def main():
-    p1 = player("player1", "king")
+    p1 = player("player1", "monarch")
+    #p2 = player("") 
     p1.status()
+
 
 if __name__ == "__main__":
     main()

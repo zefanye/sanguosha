@@ -70,6 +70,14 @@ def main():
     all_cards.append(card("tips","clubs","A","duel"))
     all_cards.append(card("basic","diamonds","K","attack"))
     all_cards.append(card("tips","spades","6","enprisoned"))
+    all_cards.append(card("equipment","clubs","A","silver lion helmet"))
+    all_cards.append(card("basic","spades","3","wine"))
+    all_cards.append(card("basic","diamonds","7","dodge"))
+    all_cards.append(card("equipment","diamonds","K","hua liu"))
+    all_cards.append(card("basic","spades","8","attack"))
+    all_cards.append(card("basic","spades","8","attack"))
+    all_cards.append(card("basic","spades","8","attack"))
+    all_cards.append(card("basic","spades","8","attack"))
     all_cards.append(card("basic","spades","8","attack"))
 
 
