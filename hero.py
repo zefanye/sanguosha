@@ -16,9 +16,10 @@ class hero:
         # for example: print("life limit is", self.life_limit)
         print(str(self.life_limit) +" "+ str(self.current_health)+" "+self.nation+" "+self.name)
 
+hero1 = hero(4,4,"shu","zhaoyun")
+
 def main():
-    hero1 = hero(4,4,"shu","zhaoyun")
-    hero1.show()
+   hero1.show()
 
 if __name__ == "__main__":
     main()

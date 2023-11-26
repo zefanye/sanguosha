@@ -30,16 +30,25 @@ class card:
             
         print("This is card:", element_str+self.name, self.suit, self.number, tc_str+self.category+equipment_category_str, self.description, self.image)
 
-def main():
+def shuffle(cards_to_shuffle):
+    import random
+    copied_cards=cards_to_shuffle.copy()
+    s=[]
+    
+    #print(len(cards_to_shuffle))
+    for i in range(len(copied_cards)):
+        randomCards=random.randint(0,len(copied_cards)-1)
+        #print(randomCards)
+        s.append(copied_cards[randomCards])
+        del copied_cards[randomCards]
+    return s
+
+def add_all_cards():
 
     #card1=card("basic","hearts","9","peach")
     #card2=card("tips","spades","A","lightning")
 
-    all_cards=[]
-
-
-
-
+    global all_cards
     all_cards.append(card("equipment","spades","K","da_wuan","-1 horse"))
     all_cards.append(card("tips","spades","J","steal"))
     all_cards.append(card("basic","spades","5","attack",e="thunder"))
@@ -80,9 +89,45 @@ def main():
     all_cards.append(card("basic","spades","8","attack"))
     all_cards.append(card("basic","spades","8","attack"))
 
+    return
 
-    for c in all_cards:
+all_cards = []
+
+card_stack = []
+
+discard_pile=all_cards
+ 
+
+
+def extract_card_from_stack(): 
+    global card_stack
+    global discard_pile
+    if len(card_stack)==0:
+        card_stack=shuffle(discard_pile)
+        discard_pile=[]
+        # discard_pile need to be emptied here!!!   
+    cards=card_stack[0]
+    del card_stack[0]
+    return cards
+
+def discard_card(c):
+    global discard_pile
+    discard_pile.append(c)
+
+
+def init():
+    add_all_cards()
+    global card_stack
+    card_stack = shuffle(all_cards)
+    #for c in card_stack:
+    #    c.show()
+
+def main():
+    init()
+    for i in range(100):
+        c = extract_card_from_stack()
         c.show()
+        discard_card(c)
 
 if __name__ == "__main__":
     main()
