@@ -17,9 +17,9 @@ class hero:
         print(str(self.life_limit) +" "+ str(self.current_health)+" "+self.nation+" "+self.name)
 
 hero1 = hero(4,4,"shu","zhaoyun")
-
+hero2=hero(4,4,"wei","caocao")
 def main():
-   hero1.show()
-
+    hero1.show()
+    hero2.show()
 if __name__ == "__main__":
     main()

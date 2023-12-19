@@ -3,24 +3,37 @@
 # picking card stage
 # playing card stage
 # discarding card stage
+import interact
+import player
 
+def preparation_stage(p):
+    print("preparation_stage")
+    
 def determination_stage(p):
-    pass
+    print("determination_stage")
 
 def pick_card_stage(p):
+    for i in range(2):
+        p.draw_cards()
+    print("pick_card_stage")
     # Player draw two cards
-    pass
+    
 
 def play_card_stage(p):
-    while (ask_player_action() != 0):
+    print("in playing card")
+    while (interact.ask_player_action(p) != 0):
         pass
 
 def discard_card_stage(p):
-    pass
+    print("discard_card_stage")
+
+def end_stage(p):
+    print("end_stage")
 
 def round(p):
+    preparation_stage(p)
     determination_stage(p)
     pick_card_stage(p)
     play_card_stage(p)
     discard_card_stage(p)
-    pass
+    end_stage(p)
