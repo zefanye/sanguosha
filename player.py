@@ -21,7 +21,7 @@ class player:
         
     
     def show_cards(self):
-        print("You have"+str(len(self.cards))+"cards")
+        print("You have "+str(len(self.cards))+" cards")
         for c in self.cards:
             c.show()
 

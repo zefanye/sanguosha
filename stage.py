@@ -7,6 +7,7 @@ import interact
 import player
 
 def preparation_stage(p):
+    print("\n"+p.id+"'s turn: " )
     print("preparation_stage")
     
 def determination_stage(p):
