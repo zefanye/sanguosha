@@ -83,12 +83,23 @@ def add_all_cards():
     all_cards.append(card("basic","spades","3","wine"))
     all_cards.append(card("basic","diamonds","7","dodge"))
     all_cards.append(card("equipment","diamonds","K","hua liu"))
-    all_cards.append(card("basic","spades","8","attack"))
-    all_cards.append(card("basic","spades","8","attack"))
-    all_cards.append(card("basic","spades","8","attack"))
-    all_cards.append(card("basic","spades","8","attack"))
-    all_cards.append(card("basic","spades","8","attack"))
+    all_cards.append(card("basic","hearts","9","peach"))
+    all_cards.append(card("basic","clubs","8","attack"))
+    all_cards.append(card("basic","diamonds","9","attack"))
+    all_cards.append(card("basic","diamonds","Q","peach"))
+    all_cards.append(card("tips","clubs","4","discard"))
+    all_cards.append(card("basic","clubs","J","attack"))
+    all_cards.append(card("basic","spades","7","attack"))
+    all_cards.append(card("tips","clubs","Q","borrow weapon"))
+    all_cards.append(card("tips","hearts","4","harvest"))
+    all_cards.append(card("basic","hearts","2","dodge"))
+    all_cards.append(card("basic","diamonds","J","dodge"))
+    all_cards.append(card("basic","hearts","4","attack",e="fire"))
+    all_cards.append(card("tips","hearts","9","something from nothing"))
 
+    
+    
+    
     return
 
 all_cards = []

@@ -21,18 +21,18 @@ class player:
         
     
     def show_cards(self):
-        print("You have "+str(len(self.cards))+" cards")
+        print(self.id+" has "+str(len(self.cards))+" cards")
         for c in self.cards:
             c.show()
 
     def show_life(self):
-        print("You have "+str(self.life)+" life")
+        print(self.id+" has "  +str(self.life)+" life")
     
     def show_hero(self):
-        print("You are playing as "+self.hero.name)
+        print(self.id+" is playing as "+self.hero.name)
 
     def show_role(self):
-        print("You are a "+self.role)
+        print(self.id+" is a "+self.role)
 
 def main():
 

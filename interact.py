@@ -2,7 +2,7 @@
 import re
 import player
 def ask_player_action(p):
-    command = input("Please play card: ")
+    command = input("Please pick action: ")
     return interpret_command(p, command)
 
 def def_command(name, func):
@@ -35,6 +35,10 @@ def execute_command(p, str, *args):
 def end_play_stage(p, *args):
     return 0
 
+def Show_part(p):
+    print(p.id+" has "+str(len(p.cards))+" cards")
+    Show_life(p)
+    Show_hero(p)
 
 def Show_cards(p):
     p.show_cards()
@@ -47,11 +51,14 @@ def Show_hero(p):
 
 def Show_role(p):
     p.show_role()
+
 def Show_all(p,*args):
     Show_cards(p)
     Show_life(p)
     Show_hero(p)
     Show_role(p)
+    print("\n")
+
 def play_card(p, *args):
     print(args)
     return 1

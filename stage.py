@@ -5,11 +5,18 @@
 # discarding card stage
 import interact
 import player
-
+import global_var
 def preparation_stage(p):
+    live_players=global_var.get_value()
     print("\n"+p.id+"'s turn: " )
     print("preparation_stage")
+    interact.Show_all(p)
     
+    for p_other in live_players:
+        if p_other!=p:
+            if p_other.life > 0:
+                interact.Show_part(p_other)
+    #interact.Show_part(p)
 def determination_stage(p):
     print("determination_stage")
 
