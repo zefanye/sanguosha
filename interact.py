@@ -1,9 +1,28 @@
 # python module to interact with human players
 import re
 import player
+import skill
+def interpret_stage(p):
+    stage = input("What stage are you in: ")
+    return stage
 def ask_player_action(p):
-    command = input("Please pick action: ")
+    current_stage=interpret_stage(p)
+    
+    if current_stage=="preparation stage":
+        command = input("\nPlease pick action(skill,end,show): ")
+    if current_stage==interpret_stage(p)=="draw stage":
+        command = input("\nPlease pick action(skill,end,show,draw): ")
+    if current_stage=="determination stage":
+        command = input("\nPlease pick action(skill,determination,end,show): ")
+    if current_stage=="play card stage":
+        command = input("\nPlease pick action(skill,play,end,show): ")
+    if current_stage=="discard stage":
+        command = input("\nPlease pick action(skill,show,discard,end): ")
+    if current_stage=="end stage":
+        command = input("\nPlease pick action(skill,show,end): ")
     return interpret_command(p, command)
+
+
 
 def def_command(name, func):
     global all_commands
@@ -35,6 +54,13 @@ def execute_command(p, str, *args):
 def end_play_stage(p, *args):
     return 0
 
+def use_skill(p,*args):
+    skill_use=input("Enter the name of the skill you want to use: ")
+    for p in skill.skill_storage(p):
+        #print(p.skill_name)
+        if p.skill_name==skill_use:
+            skill.show_skill(p)
+            #skill.skill_effect(p)
 def Show_part(p):
     print(p.id+" has "+str(len(p.cards))+" cards")
     Show_life(p)
@@ -59,11 +85,14 @@ def Show_all(p,*args):
     Show_role(p)
     print("\n")
 
+
 def play_card(p, *args):
-    print(args)
-    return 1
+    
+    action=input("Play which card: ")
+   
 
 all_commands=[]
 def_command("end", end_play_stage)
 def_command("play", play_card)
+def_command("skill", use_skill)
 def_command("show",Show_all)

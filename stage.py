@@ -16,11 +16,14 @@ def preparation_stage(p):
         if p_other!=p:
             if p_other.life > 0:
                 interact.Show_part(p_other)
+    interact.interpret_stage(p)
+    while (interact.ask_player_action(p) != 0):
+        pass
     #interact.Show_part(p)
 def determination_stage(p):
     print("determination_stage")
 
-def pick_card_stage(p):
+def draw_stage(p):
     for i in range(2):
         p.draw_cards()
     print("pick_card_stage")
@@ -41,7 +44,7 @@ def end_stage(p):
 def round(p):
     preparation_stage(p)
     determination_stage(p)
-    pick_card_stage(p)
+    draw_stage(p)
     play_card_stage(p)
     discard_card_stage(p)
     end_stage(p)

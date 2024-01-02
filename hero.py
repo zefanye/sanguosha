@@ -16,8 +16,9 @@ class hero:
         # for example: print("life limit is", self.life_limit)
         print(str(self.life_limit) +" "+ str(self.current_health)+" "+self.nation+" "+self.name)
 
+    
 hero1 = hero(4,4,"shu","zhaoyun")
-hero2=hero(4,4,"wei","caocao")
+hero2=hero(4,4,"wu","sunjian")
 def main():
     hero1.show()
     hero2.show()
