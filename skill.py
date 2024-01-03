@@ -3,7 +3,7 @@ import player
 import hero
 class skill:
     
-    def __init__(self,sn,sty,st,sf,sd):
+    def __init__(self, sn, sty, st, sf, sd):
         self.skill_trigger=st
         self.skill_type=sty
         self.skill_frequency=sf
