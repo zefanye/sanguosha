@@ -5,20 +5,18 @@ import skill
 import stage
     
    
-def ask_player_action(p,current_stage):
+def ask_player_action(p,current_stage,stage_commands):
+    f=""
+    for i in stage_commands:
+        f+=i[0]
+        if i!=stage_commands[len(stage_commands)-1]:
+            f+=", "
+#    for i in stage_commands:
+#        if i != stage_commands[0]:
+#            f+=", "
+#        f+=i[0]   
+    command=input("\nPlease pick action("+f+"): ")
     
-    if current_stage==stage.PREPARATION_STAGE:
-        command = input("\nPlease pick action(skill, end, show): ")
-    if current_stage==stage.DETETMINATION_STAGE:
-        command = input("\nPlease pick action(skill, end, show, determination): ")
-    if current_stage==stage.DRAW_STAGE:
-        command = input("\nPlease pick action(skill, draw, end, show): ")
-    if current_stage==stage.PLAY_CARD_STAGE:
-        command = input("\nPlease pick action(skill, play, end, show): ")
-    if current_stage==stage.DISCARD_CARD_STAGE:
-        command = input("\nPlease pick action(skill, show, discard, end): ")
-    if current_stage==stage.END_STAGE:
-        command = input("\nPlease pick action(skill, show, end): ")
     return interpret_command(p, command, current_stage)
 
 
@@ -36,12 +34,12 @@ def remove_empty_str(list):
     return new_list
 
 def interpret_command(p, str, current_stage):
+    stage_commands=valid_commands(current_stage)
     arg_list=re.split(' ', str)
     new_arg_list = remove_empty_str(arg_list)
-    return execute_command(p, new_arg_list[0], current_stage, new_arg_list)
+    return execute_command(p, new_arg_list[0], stage_commands, current_stage, new_arg_list)
 
-def execute_command(p, str, current_stage, *args ):
-    valid=False
+def valid_commands(current_stage):
     stage_commands=all_commands.copy()
     if current_stage==stage.PREPARATION_STAGE:
         del stage_commands[6]
@@ -58,9 +56,11 @@ def execute_command(p, str, current_stage, *args ):
         
     elif current_stage==stage.DRAW_STAGE:
         del stage_commands[6]
-        del stage_commands[4]
+        del stage_commands[5]
+        del stage_commands[4]   
         del stage_commands[1]
         
+    
     elif current_stage==stage.PLAY_CARD_STAGE:
         del stage_commands[6]
         del stage_commands[5]
@@ -77,6 +77,10 @@ def execute_command(p, str, current_stage, *args ):
         del stage_commands[5]
         del stage_commands[4]
         del stage_commands[1]
+    return stage_commands    
+def execute_command(p, str, stage_commands, *args ):
+    valid=False
+    
         
         
     for c in stage_commands:
@@ -131,8 +135,9 @@ def Show_all(p,*args):
 
 def play_card(p, *args):
     
-    action=input("Play which card: ")
-   
+    action=int(input("Play which card: "))
+    action=action-1
+    p.play_card(action)
 
 all_commands=[]
 def_command("end", end_play_stage)

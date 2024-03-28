@@ -16,6 +16,7 @@ class player:
     def disclose_role(self):
         print(f"Player {self.id}''s role is {self.role}")
         print("Player", self.id, "''s role is ", self.role)
+    
     def draw_cards(self):
         self.cards.append(card.extract_card_from_stack())
         
@@ -33,7 +34,11 @@ class player:
 
     def show_role(self):
         print(self.id+" is a "+self.role)
-
+    
+    def play_card(self,index):
+        current_card=self.cards[index]
+        del self.cards[index]
+        played_card=current_card.play(self)
 def main():
 
     card.init()    

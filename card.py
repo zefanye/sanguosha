@@ -1,6 +1,6 @@
-
+import player
 class card:
-    def __init__(self, cat, s, n, na, ec="", r="", tc="", e="", d="", i=""):
+    def __init__(self, cat, s, n, na, ec="", r="", tc="", e="", d="", i="", action=None):
         self.category=cat
         self.suit=s
         self.number=n
@@ -11,6 +11,7 @@ class card:
         self.equipment_category=ec
         self.range=r
         self.tips_category=tc
+        self.action=action
         
     def show(self):
         element_str =""
@@ -29,6 +30,11 @@ class card:
         
             
         print("This is card:", element_str+self.name, "["+self.suit, self.number, tc_str+self.category+equipment_category_str, self.description, self.image+"]")
+    def play(self,self_player:player):
+        #if self.name=="something from nothing":
+            print("Play something from nothing")
+            for i in range(2):
+                self_player.draw_cards()
 
 def shuffle(cards_to_shuffle):
     import random
@@ -137,6 +143,11 @@ def discard_card(c):
     global discard_pile
     discard_pile.append(c)
 
+
+
+
+def card_type_bank():
+    pass
 
 def init():
     add_all_cards()
