@@ -99,7 +99,19 @@ def add_all_cards():
     all_cards.append(card("tips","spades","3","discard"))
     all_cards.append(card("equipment","diamonds","Q","attack"))
     all_cards.append(card("tips","hearts","Q","discard"))
-    
+    all_cards.append(card("tips","diamonds","Q","fire attack"))
+    all_cards.append(card("basic","diamonds","Q","peach"))
+    all_cards.append(card("tips","diamonds","Q","unbreakable"))
+    all_cards.append(card("basic","diamonds","K","attack"))
+    all_cards.append(card("equipment","diamonds","K","purple_horse","-1 horse"))
+    all_cards.append(card("equipment","diamonds","A","zhuge_crossbow","weapons","1"))
+    all_cards.append(card("basic","diamonds","2","dodge"))
+    all_cards.append(card("equipment","spades","2","bagua_array"))
+    all_cards.append(card("basic","diamonds","2","peach"))
+    all_cards.append(card("equipment","clubs","2","bagua_array"))
+    all_cards.append(card("equipment","spades","6","qing_gang_sword","weapons","2"))
+    all_cards.append(card("basic","hearts","J","dodge"))
+    all_cards.append(card("basic","diamonds","2","peach"))
     return
 
 all_cards = []

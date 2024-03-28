@@ -17,6 +17,7 @@ skill_bank=[]
 def skill_storage(self):
     global skill_bank
     yinghun=skill_bank.append(skill("yinghun","basic","preparation stage","1 per stage","Yinghun: Once in each of own preparation stage, if you are unhealthy, you choose an option:\n1. Let another character draw 1 card and discard X cards.\n2. Let another character draw X cards and discard 1 card.(X is the number of health you are missing.)"))
+    
     return skill_bank
 def yinghun(self):
         global skill_bank 
@@ -25,8 +26,8 @@ def yinghun(self):
             card.draw_cards(self)
             for i in range(hero.life_limit-player.p.life):
                 card.discard_card(self)
+                       
         elif user_choice==2:
             for i in range(hero.life_limit-player.p.life):
                   card.draw_cards(self)
             card.discard_card(self)
-        

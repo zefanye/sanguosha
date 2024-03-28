@@ -10,9 +10,9 @@ def ask_player_action(p,current_stage):
     if current_stage==stage.PREPARATION_STAGE:
         command = input("\nPlease pick action(skill, end, show): ")
     if current_stage==stage.DETETMINATION_STAGE:
-        command = input("\nPlease pick action(skill, end, show, draw): ")
+        command = input("\nPlease pick action(skill, end, show, determination): ")
     if current_stage==stage.DRAW_STAGE:
-        command = input("\nPlease pick action(skill, determination, end, show): ")
+        command = input("\nPlease pick action(skill, draw, end, show): ")
     if current_stage==stage.PLAY_CARD_STAGE:
         command = input("\nPlease pick action(skill, play, end, show): ")
     if current_stage==stage.DISCARD_CARD_STAGE:
