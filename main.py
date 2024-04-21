@@ -22,11 +22,11 @@ def get_live_players_from(ap):
 
 def main():
     card.init()    
-    p1 = player.player("player1","monarch",cards=[], hero=hero.hero1,life=4+1)
+    p1 = player.player("player1","monarch",cards=[], hero=hero.hero1,life=4+1,life_limit=4+1)
     for i in range(5): 
         p1.draw_cards()
     #p1.show_cards()
-    p2 = player.player("player2","rebellion",cards=[], hero=hero.hero2, life=3)
+    p2 = player.player("player2","rebellion",cards=[], hero=hero.hero2, life=3,life_limit=3)
     #p2.show_cards()
     for i in range(5): 
         p2.draw_cards()

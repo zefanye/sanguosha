@@ -2,21 +2,26 @@ import card
 import hero
 
 class player:
-    def __init__(self, id, role, cards = [], hero = None, life = 0):
+    def __init__(self, id, role, cards = [], hero = None, life = 0, life_limit=0):
         self.id = id
         self.cards = cards
         self.life = life
         self.hero = hero
         self.role = role
-
+        self.life_limit=life_limit
     def status(self):
-        print(f"Player {self.id}: hero {self.hero.name}, life {self.life}")
+        print(f"Player {self.id}: hero {self.hero.name}, life {self.life}, life_limit {self.life_limit}")
         print(f"Hero's life limit {self.hero.life_limit}")
 
     def disclose_role(self):
         print(f"Player {self.id}''s role is {self.role}")
         print("Player", self.id, "''s role is ", self.role)
     
+    def restore_health(self):
+        if self.life<self.life_limit:
+            self.life=self.life+1
+            return True
+        return False
     def draw_cards(self):
         self.cards.append(card.extract_card_from_stack())
         
@@ -44,7 +49,7 @@ class player:
 def main():
 
     card.init()    
-    p1 = player("player1","monarch",hero=hero.hero1,life=4)
+    p1 = player("player1","monarch",hero=hero.hero1,life=4,life_limit=4)
     for i in range(5): 
         p1.draw_cards()
     p1.show_cards()

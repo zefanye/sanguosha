@@ -1,4 +1,10 @@
 import player
+
+def action_default(self_card, player):
+    print("This is the default action for")
+    self_card.show()
+    return True
+    
 class card:
     def __init__(self, cat, s, n, na, ec="", r="", tc="", e="", d="", i="", action=action_default):
         self.category=cat
@@ -35,7 +41,7 @@ class card:
         #    print("Play something from nothing")
         #    for i in range(2):
         #        self_player.draw_cards()
-        action(self, self_player)
+        return self.action(self, self_player)
 
 def shuffle(cards_to_shuffle):
     import random
@@ -55,16 +61,15 @@ def shuffle(cards_to_shuffle):
 # All card actions must accept two parameters:
 #   self_card: the card that has the action
 #   player: the player who play the card
-def action_default(self_card, player):
-    print("This is the default action for")
-    self_card.show()
-    return True
-    
 def action_something_from_nothing(self_card, player):
-    for in in range(2):
+    for i in range(2):
         player.draw_cards()
     return True
 
+def action_peach(self_card, player):
+   
+    succesful=player.restore_health()
+    return succesful
 def add_all_cards():
 
     #card1=card("basic","hearts","9","peach")
@@ -76,7 +81,7 @@ def add_all_cards():
     all_cards.append(card("basic","spades","5","attack",e="thunder"))
     all_cards.append(card("tips","spades","A","lightning",tc="delayed"))
     all_cards.append(card("basic","hearts","2","dodge"))
-    all_cards.append(card("basic","hearts","9","peach"))
+    all_cards.append(card("basic","hearts","9","peach", action=action_peach))
     all_cards.append(card("equipment","diamonds","A","fan","weapons","4"))
     all_cards.append(card("tips","clubs","Q","unbreakable")) 
     all_cards.append(card("equipment","spades","5","dragon blade","weapons","3"))
@@ -92,7 +97,7 @@ def add_all_cards():
     all_cards.append(card("tips","hearts","9","something from nothing", action=action_something_from_nothing))
     all_cards.append(card("tips","spades","3","steal"))
     all_cards.append(card("equipment","spades","2","masculine feminine double wielded swords","weapons","2"))
-    all_cards.append(card("basic","hearts","6","peach"))
+    all_cards.append(card("basic","hearts","6","peach", action=action_peach))
     all_cards.append(card("basic","hearts","10","attack"))
     all_cards.append(card("tips","diamonds","3","steal"))
     all_cards.append(card("basic","diamonds","6","dodge"))
@@ -105,10 +110,10 @@ def add_all_cards():
     all_cards.append(card("basic","spades","3","wine"))
     all_cards.append(card("basic","diamonds","7","dodge"))
     all_cards.append(card("equipment","diamonds","K","hua liu"))
-    all_cards.append(card("basic","hearts","9","peach"))
+    all_cards.append(card("basic","hearts","9","peach", action=action_peach))
     all_cards.append(card("basic","clubs","8","attack"))
     all_cards.append(card("basic","diamonds","9","attack"))
-    all_cards.append(card("basic","diamonds","Q","peach"))
+    all_cards.append(card("basic","diamonds","Q","peach", action=action_peach))
     all_cards.append(card("tips","clubs","4","discard"))
     all_cards.append(card("basic","clubs","J","attack"))
     all_cards.append(card("basic","spades","7","attack"))
@@ -122,18 +127,18 @@ def add_all_cards():
     all_cards.append(card("equipment","diamonds","Q","attack"))
     all_cards.append(card("tips","hearts","Q","discard"))
     all_cards.append(card("tips","diamonds","Q","fire attack"))
-    all_cards.append(card("basic","diamonds","Q","peach"))
+    all_cards.append(card("basic","diamonds","Q","peach", action=action_peach))
     all_cards.append(card("tips","diamonds","Q","unbreakable"))
     all_cards.append(card("basic","diamonds","K","attack"))
     all_cards.append(card("equipment","diamonds","K","purple_horse","-1 horse"))
     all_cards.append(card("equipment","diamonds","A","zhuge_crossbow","weapons","1"))
     all_cards.append(card("basic","diamonds","2","dodge"))
     all_cards.append(card("equipment","spades","2","bagua_array"))
-    all_cards.append(card("basic","diamonds","2","peach"))
+    all_cards.append(card("basic","diamonds","2","peach", action=action_peach))
     all_cards.append(card("equipment","clubs","2","bagua_array"))
     all_cards.append(card("equipment","spades","6","qing_gang_sword","weapons","2"))
     all_cards.append(card("basic","hearts","J","dodge"))
-    all_cards.append(card("basic","diamonds","2","peach"))
+    all_cards.append(card("basic","diamonds","2","peach", action=action_peach))
     return
 
 all_cards = []
@@ -169,6 +174,7 @@ def init():
     add_all_cards()
     global card_stack
     card_stack = shuffle(all_cards)
+    card_stack.insert(0, card("basic","diamonds","2","peach", action=action_peach))
     #for c in card_stack:
     #    c.show()
 

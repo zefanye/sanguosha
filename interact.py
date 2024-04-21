@@ -136,7 +136,7 @@ def Show_all(p,*args):
 def play_card(p, *args):
     
     action=int(input("Play which card: "))
-    action=action-1
+    #action=action-1
     p.play_card(action)
 
 all_commands=[]
