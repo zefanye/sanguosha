@@ -37,8 +37,10 @@ class player:
     
     def play_card(self,index):
         current_card=self.cards[index]
-        del self.cards[index]
-        played_card=current_card.play(self)
+        success=current_card.play(self)
+        if success:
+            del self.cards[index]
+
 def main():
 
     card.init()    

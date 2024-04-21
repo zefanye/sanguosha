@@ -1,6 +1,6 @@
 import player
 class card:
-    def __init__(self, cat, s, n, na, ec="", r="", tc="", e="", d="", i="", action=None):
+    def __init__(self, cat, s, n, na, ec="", r="", tc="", e="", d="", i="", action=action_default):
         self.category=cat
         self.suit=s
         self.number=n
@@ -30,11 +30,12 @@ class card:
         
             
         print("This is card:", element_str+self.name, "["+self.suit, self.number, tc_str+self.category+equipment_category_str, self.description, self.image+"]")
-    def play(self,self_player:player):
+    def play(self, self_player:player):
         #if self.name=="something from nothing":
-            print("Play something from nothing")
-            for i in range(2):
-                self_player.draw_cards()
+        #    print("Play something from nothing")
+        #    for i in range(2):
+        #        self_player.draw_cards()
+        action(self, self_player)
 
 def shuffle(cards_to_shuffle):
     import random
@@ -48,6 +49,21 @@ def shuffle(cards_to_shuffle):
         s.append(copied_cards[randomCards])
         del copied_cards[randomCards]
     return s
+
+##############################################
+# Define all card actions here
+# All card actions must accept two parameters:
+#   self_card: the card that has the action
+#   player: the player who play the card
+def action_default(self_card, player):
+    print("This is the default action for")
+    self_card.show()
+    return True
+    
+def action_something_from_nothing(self_card, player):
+    for in in range(2):
+        player.draw_cards()
+    return True
 
 def add_all_cards():
 
@@ -73,7 +89,7 @@ def add_all_cards():
     all_cards.append(card("basic","diamonds","2","dodge"))
     all_cards.append(card("tips","hearts","A","brotherhood"))
     all_cards.append(card("equipment","spades","5","jue ying","+1 horse"))
-    all_cards.append(card("tips","hearts","9","something from nothing"))
+    all_cards.append(card("tips","hearts","9","something from nothing", action=action_something_from_nothing))
     all_cards.append(card("tips","spades","3","steal"))
     all_cards.append(card("equipment","spades","2","masculine feminine double wielded swords","weapons","2"))
     all_cards.append(card("basic","hearts","6","peach"))
