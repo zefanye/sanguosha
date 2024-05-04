@@ -1,5 +1,5 @@
 import player
-
+import global_var
 def action_default(self_card, player):
     print("This is the default action for")
     self_card.show()
@@ -66,6 +66,13 @@ def action_something_from_nothing(self_card, player):
         player.draw_cards()
     return True
 
+def action_attack(self_card, player):
+    live_players=global_var.get_live_players()
+    target=int(input("Which player are you attacking? "))
+    if target>=len(live_players):
+        print("player does not exist")
+    target_player=global_var.get_live_players()[target]
+    
 def action_peach(self_card, player):
    
     succesful=player.restore_health()
@@ -139,6 +146,15 @@ def add_all_cards():
     all_cards.append(card("equipment","spades","6","qing_gang_sword","weapons","2"))
     all_cards.append(card("basic","hearts","J","dodge"))
     all_cards.append(card("basic","diamonds","2","peach", action=action_peach))
+    all_cards.append(card("basic","diamonds","4","dodge"))
+    all_cards.append(card("tips","hearts","Q","lightning",tc="delayed"))
+    all_cards.append(card("basic","hearts","9","peach"))
+    all_cards.append(card("tips","spades","4","attack",e="thunder"))
+    all_cards.append(card("basic","clubs","2","attack"))
+    all_cards.append(card("basic","clubs","5","attack",e="thunder"))
+    all_cards.append(card("tips","hearts","K","unbreakable"))
+    all_cards.append(card("tips","hearts","6","banished",tc="delayed"))    
+    all_cards.append(card("tips","clubs","K","borrow weapon"))
     return
 
 all_cards = []
