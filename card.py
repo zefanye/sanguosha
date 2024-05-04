@@ -155,6 +155,7 @@ def add_all_cards():
     all_cards.append(card("tips","hearts","K","unbreakable"))
     all_cards.append(card("tips","hearts","6","banished",tc="delayed"))    
     all_cards.append(card("tips","clubs","K","borrow weapon"))
+    
     return
 
 all_cards = []

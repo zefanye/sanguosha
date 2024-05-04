@@ -25,7 +25,21 @@ class player:
     def draw_cards(self):
         self.cards.append(card.extract_card_from_stack())
         
-    
+    def play_dodge(self):
+        have_dodge=False
+        for i in self.cards:
+            if i.name=="dodge":
+                have_dodge=True
+                break
+        if have_dodge:
+            play=input("Do you want to play a dodge? ")
+            if play=="yes":
+                which_dodge=int(input("Which dodge card do you want to play? "))        
+                playdodge=self.cards[which_dodge]
+                if playdodge.name=="dodge":
+                    self.discard_card()
+        succesful=False
+        return succesful
     def show_cards(self):
         print(self.id+" has "+str(len(self.cards))+" cards")
         for c in self.cards:
@@ -45,7 +59,8 @@ class player:
         success=current_card.play(self)
         if success:
             del self.cards[index]
-
+        else:
+            print("cannot play this card")
 def main():
 
     card.init()    
