@@ -1,6 +1,6 @@
 import card
 import hero
-import protocol
+import sgs_server
 
 class player:
     def __init__(self, id, role, cards = [], hero = None, life = 0, life_limit=0, remote_connection=None):
@@ -71,14 +71,18 @@ class player:
             # call the system input
             return input(prompt)
         else:
-            send_protocol = protocol.ask_input(prompt)
+            send_protocol = f"{sgs_server.input_prefix}{len(prompt)}!{prompt}"
             remote_connection.send(send_protocol.encode())
             return remote_connection.recv(1024).decode()
 
     # Print standard output to this player
-    def player_print(self):
-        pass
-
+    def player_print(self, msg):
+        if not remote_connection:
+            # call the system print
+            print(msg)
+        else:
+            send_protocol = f"{sgs_server.print_prefix}{len(msg)}!{msg}"
+            remote_connection.send(send_protocol.encode())
 def main():
 
     card.init()    
