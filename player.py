@@ -1,14 +1,17 @@
 import card
 import hero
+import protocol
 
 class player:
-    def __init__(self, id, role, cards = [], hero = None, life = 0, life_limit=0):
+    def __init__(self, id, role, cards = [], hero = None, life = 0, life_limit=0, remote_connection=None):
         self.id = id
         self.cards = cards
         self.life = life
         self.hero = hero
         self.role = role
         self.life_limit=life_limit
+        self.remote_connection = remote_connection
+
     def status(self):
         print(f"Player {self.id}: hero {self.hero.name}, life {self.life}, life_limit {self.life_limit}")
         print(f"Hero's life limit {self.hero.life_limit}")
@@ -61,6 +64,21 @@ class player:
             del self.cards[index]
         else:
             print("cannot play this card")
+
+    # Get input from this player
+    def input(self, prompt):
+        if not remote_connection:
+            # call the system input
+            return input(prompt)
+        else:
+            send_protocol = protocol.ask_input(prompt)
+            remote_connection.send(send_protocol.encode())
+            return remote_connection.recv(1024).decode()
+
+    # Print standard output to this player
+    def player_print(self):
+        pass
+
 def main():
 
     card.init()    
