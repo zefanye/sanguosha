@@ -39,7 +39,8 @@ def main():
         for p in live_players:
             if p.life > 0:
                 stage.round(p)
-        global_var.set_live_players(get_live_players_from(all_players))   
+        global_var.set_live_players(get_live_players_from(all_players))
+        live_players = global_var.get_live_players
     
 if __name__ == "__main__":
     main()

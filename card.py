@@ -1,7 +1,8 @@
+import threading
 import player
 import global_var
 def action_default(self_card, player):
-    print("This is the default action for")
+    player.print("This is the default action for")
     self_card.show()
     return True
     
@@ -19,7 +20,7 @@ class card:
         self.tips_category=tc
         self.action=action
         
-    def show(self):
+    def show(self, player=None):
         element_str =""
         if self.element != "":
             element_str=self.element+"-"
@@ -33,9 +34,11 @@ class card:
         tc_str=""
         if self.tips_category !="":
             tc_str=self.tips_category+"-"
-        
-            
-        print("This is card:", element_str+self.name, "["+self.suit, self.number, tc_str+self.category+equipment_category_str, self.description, self.image+"]")
+        msg = f"This is card: {element_str+self.name} [{self.suit} {self.number} {tc_str+self.category+equipment_category_str} {self.description} {self.image}]"
+        if player != None:
+            player.print(msg)
+        else:
+            print(msg)
     def play(self, self_player:player):
         #if self.name=="something from nothing":
         #    print("Play something from nothing")
@@ -68,9 +71,9 @@ def action_something_from_nothing(self_card, player):
 
 def action_attack(self_card, player):
     live_players=global_var.get_live_players()
-    target=int(input("Which player are you attacking? "))
+    target=int(player.input("Which player are you attacking? "))
     if target>=len(live_players):
-        print("player does not exist")
+        player.print("player does not exist")
     target_player=global_var.get_live_players()[target]
     
 def action_peach(self_card, player):
@@ -164,25 +167,23 @@ card_stack = []
 
 discard_pile=all_cards
  
-
+card_lock = threading.Lock()
 
 def extract_card_from_stack(): 
     global card_stack
     global discard_pile
-    if len(card_stack)==0:
-        card_stack=shuffle(discard_pile)
-        discard_pile=[]
-        # discard_pile need to be emptied here!!!   
-    cards=card_stack[0]
-    del card_stack[0]
+    with card_lock:
+        if len(card_stack)==0:
+            card_stack=shuffle(discard_pile)
+            discard_pile=[]
+            # discard_pile need to be emptied here!!!
+        cards=card_stack[0]
+        del card_stack[0]
     return cards
 
 def discard_card(c):
     global discard_pile
     discard_pile.append(c)
-
-
-
 
 def card_type_bank():
     pass
@@ -192,8 +193,6 @@ def init():
     global card_stack
     card_stack = shuffle(all_cards)
     card_stack.insert(0, card("basic","diamonds","2","peach", action=action_peach))
-    #for c in card_stack:
-    #    c.show()
 
 def main():
     init()

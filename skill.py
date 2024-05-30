@@ -11,8 +11,12 @@ class skill:
         self.skill_description=sd
     
     
-def show_skill(self):
-    print(self.skill_name+" "+self.skill_type+" "+self.skill_trigger+" "+self.skill_description)
+def show_skill(self, player=None):
+    msg = self.skill_name+" "+self.skill_type+" "+self.skill_trigger+" "+self.skill_description
+    if player != None:
+        player.print(msg)
+    else:
+        print(msg)
 skill_bank=[] 
 def skill_storage(self):
     global skill_bank
@@ -20,7 +24,8 @@ def skill_storage(self):
     
     return skill_bank
 def yinghun(self):
-        global skill_bank 
+        global skill_bank
+        # Following code needs to be fixed as input can only be taking from a player
         user_choice=int(input("Choose between the two options: "))
         if user_choice==1:
             card.draw_cards(self)

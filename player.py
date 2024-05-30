@@ -1,22 +1,24 @@
 import card
 import hero
+import sgs_server
 
 class player:
-    def __init__(self, id, role, cards = [], hero = None, life = 0, life_limit=0):
+    def __init__(self, id, role, cards = [], hero = None, life = 0, life_limit=0, remote_connection=None):
         self.id = id
         self.cards = cards
         self.life = life
         self.hero = hero
         self.role = role
         self.life_limit=life_limit
+        self.remote_connection = remote_connection
+
     def status(self):
-        print(f"Player {self.id}: hero {self.hero.name}, life {self.life}, life_limit {self.life_limit}")
-        print(f"Hero's life limit {self.hero.life_limit}")
+        self.print(f"Player {self.id}: hero {self.hero.name}, life {self.life}, life_limit {self.life_limit}")
+        self.print(f"Hero's life limit {self.hero.life_limit}")
 
     def disclose_role(self):
-        print(f"Player {self.id}''s role is {self.role}")
-        print("Player", self.id, "''s role is ", self.role)
-    
+        self.print(f"Player {self.id}''s role is {self.role}")
+     
     def restore_health(self):
         if self.life<self.life_limit:
             self.life=self.life+1
@@ -32,27 +34,27 @@ class player:
                 have_dodge=True
                 break
         if have_dodge:
-            play=input("Do you want to play a dodge? ")
+            play=self.input("Do you want to play a dodge? ")
             if play=="yes":
-                which_dodge=int(input("Which dodge card do you want to play? "))        
+                which_dodge=int(self.input("Which dodge card do you want to play? "))
                 playdodge=self.cards[which_dodge]
                 if playdodge.name=="dodge":
                     self.discard_card()
         succesful=False
         return succesful
     def show_cards(self):
-        print(self.id+" has "+str(len(self.cards))+" cards")
+        self.print(self.id+" has "+str(len(self.cards))+" cards")
         for c in self.cards:
-            c.show()
+            c.show(self)
 
     def show_life(self):
-        print(self.id+" has "  +str(self.life)+" life")
+        self.print(self.id+" has "  +str(self.life)+" life")
     
     def show_hero(self):
-        print(self.id+" is playing as "+self.hero.name)
+        self.print(self.id+" is playing as "+self.hero.name)
 
     def show_role(self):
-        print(self.id+" is a "+self.role)
+        self.print(self.id+" is a "+self.role)
     
     def play_card(self,index):
         current_card=self.cards[index]
@@ -60,7 +62,24 @@ class player:
         if success:
             del self.cards[index]
         else:
-            print("cannot play this card")
+            self.print("cannot play this card")
+
+    # Get input from this player
+    def input(self, prompt):
+        if not self.remote_connection:
+            # call the system input
+            return input(prompt)
+        else:
+            return sgs_server.input_from_remote(self.remote_connection, prompt)
+
+    # Print standard output to this player
+    def print(self, msg):
+        if not self.remote_connection:
+            # call the system print
+            print(msg)
+        else:
+            return sgs_server.print_to_remote(self.remote_connection, msg)
+
 def main():
 
     card.init()    
