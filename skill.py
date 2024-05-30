@@ -11,8 +11,12 @@ class skill:
         self.skill_description=sd
     
     
-def show_skill(self):
-    print(self.skill_name+" "+self.skill_type+" "+self.skill_trigger+" "+self.skill_description)
+def show_skill(self, player=None):
+    msg = self.skill_name+" "+self.skill_type+" "+self.skill_trigger+" "+self.skill_description
+    if player != None:
+        player.print(msg)
+    else:
+        print(msg)
 skill_bank=[] 
 def skill_storage(self):
     global skill_bank

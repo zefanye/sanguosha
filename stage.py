@@ -23,8 +23,8 @@ def preparation_stage(p):
     current_stage=PREPARATION_STAGE
     stage_commands=interact.valid_commands(current_stage)
     live_players=global_var.get_value()
-    print("\n"+p.id+"'s turn: " )
-    print("preparation_stage")
+    p.print("\n"+p.id+"'s turn: " )
+    p.print("preparation_stage")
     interact.Show_all(p)
     
     for p_other in live_players:
@@ -39,7 +39,7 @@ def preparation_stage(p):
 def determination_stage(p):
     current_stage=DETETMINATION_STAGE
     stage_commands=interact.valid_commands(current_stage)
-    print("determination_stage")
+    p.print("determination_stage")
     while (interact.ask_player_action(p, current_stage,stage_commands) != 0):
         pass
 def draw_stage(p):
@@ -54,21 +54,21 @@ def draw_stage(p):
 def play_card_stage(p):
     current_stage=PLAY_CARD_STAGE
     stage_commands=interact.valid_commands(current_stage)
-    print("in playing card")
+    p.print("in playing card")
     while (interact.ask_player_action(p, current_stage,stage_commands) != 0):
         pass
 
 def discard_card_stage(p):
     current_stage=DISCARD_CARD_STAGE
     stage_commands=interact.valid_commands(current_stage)
-    print("discard_card_stage")
+    p.print("discard_card_stage")
     while (interact.ask_player_action(p, current_stage,stage_commands) != 0):
         pass
 
 def end_stage(p):
     current_stage=END_STAGE
     stage_commands=interact.valid_commands(current_stage)
-    print("end_stage")
+    p.print("end_stage")
     while (interact.ask_player_action(p, current_stage,stage_commands) != 0):
         pass
 def round(p):

@@ -8,14 +8,15 @@ class hero:
         self.current_health=current_health
         self.nation=nation
         self.name=name
-        #self.image=image
-        print()
 
-    def show(self):
+    def show(self, player=None):
         # please show everything about a hero here, with print
         # for example: print("life limit is", self.life_limit)
-        print(str(self.life_limit) +" "+ str(self.current_health)+" "+self.nation+" "+self.name)
-
+        msg = str(self.life_limit) +" "+ str(self.current_health)+" "+self.nation+" "+self.name
+        if player != None:
+            player.print(msg)
+        else:
+            print(msg)
     
 hero1 = hero(4,4,"shu","zhaoyun")
 hero2=hero(4,4,"wu","sunjian")

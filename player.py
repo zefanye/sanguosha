@@ -13,12 +13,12 @@ class player:
         self.remote_connection = remote_connection
 
     def status(self):
-        print(f"Player {self.id}: hero {self.hero.name}, life {self.life}, life_limit {self.life_limit}")
-        print(f"Hero's life limit {self.hero.life_limit}")
+        self.print(f"Player {self.id}: hero {self.hero.name}, life {self.life}, life_limit {self.life_limit}")
+        self.print(f"Hero's life limit {self.hero.life_limit}")
 
     def disclose_role(self):
-        print(f"Player {self.id}''s role is {self.role}")
-        print("Player", self.id, "''s role is ", self.role)
+        self.print(f"Player {self.id}''s role is {self.role}")
+        self.print("Player", self.id, "''s role is ", self.role)
     
     def restore_health(self):
         if self.life<self.life_limit:
@@ -44,18 +44,18 @@ class player:
         succesful=False
         return succesful
     def show_cards(self):
-        print(self.id+" has "+str(len(self.cards))+" cards")
+        self.print(self.id+" has "+str(len(self.cards))+" cards")
         for c in self.cards:
             c.show()
 
     def show_life(self):
-        print(self.id+" has "  +str(self.life)+" life")
+        self.print(self.id+" has "  +str(self.life)+" life")
     
     def show_hero(self):
-        print(self.id+" is playing as "+self.hero.name)
+        self.print(self.id+" is playing as "+self.hero.name)
 
     def show_role(self):
-        print(self.id+" is a "+self.role)
+        self.print(self.id+" is a "+self.role)
     
     def play_card(self,index):
         current_card=self.cards[index]
@@ -63,7 +63,7 @@ class player:
         if success:
             del self.cards[index]
         else:
-            print("cannot play this card")
+            self.print("cannot play this card")
 
     # Get input from this player
     def input(self, prompt):
@@ -76,12 +76,12 @@ class player:
             return remote_connection.recv(1024).decode()
 
     # Print standard output to this player
-    def player_print(self, msg):
+    def print(self, msg):
         if not remote_connection:
             # call the system print
             print(msg)
         else:
-            send_protocol = f"{sgs_server.print_prefix}{len(msg)}!{msg}"
+            send_protocol = f"{sgs_server.print_prefix}{len(msg)}!{msg}\n"
             remote_connection.send(send_protocol.encode())
 def main():
 
