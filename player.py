@@ -35,9 +35,9 @@ class player:
                 have_dodge=True
                 break
         if have_dodge:
-            play=input("Do you want to play a dodge? ")
+            play=self.input("Do you want to play a dodge? ")
             if play=="yes":
-                which_dodge=int(input("Which dodge card do you want to play? "))        
+                which_dodge=int(self.input("Which dodge card do you want to play? "))
                 playdodge=self.cards[which_dodge]
                 if playdodge.name=="dodge":
                     self.discard_card()
@@ -46,7 +46,7 @@ class player:
     def show_cards(self):
         self.print(self.id+" has "+str(len(self.cards))+" cards")
         for c in self.cards:
-            c.show()
+            c.show(self)
 
     def show_life(self):
         self.print(self.id+" has "  +str(self.life)+" life")
@@ -67,22 +67,20 @@ class player:
 
     # Get input from this player
     def input(self, prompt):
-        if not remote_connection:
+        if not self.remote_connection:
             # call the system input
             return input(prompt)
         else:
-            send_protocol = f"{sgs_server.input_prefix}{len(prompt)}!{prompt}"
-            remote_connection.send(send_protocol.encode())
-            return remote_connection.recv(1024).decode()
+            return sgs_server.input_from_remote(self.remote_connection, prompt)
 
     # Print standard output to this player
     def print(self, msg):
-        if not remote_connection:
+        if not self.remote_connection:
             # call the system print
             print(msg)
         else:
-            send_protocol = f"{sgs_server.print_prefix}{len(msg)}!{msg}\n"
-            remote_connection.send(send_protocol.encode())
+            return sgs_server.print_to_remote(self.remote_connection, msg)
+
 def main():
 
     card.init()    

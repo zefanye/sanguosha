@@ -1,3 +1,4 @@
+import threading
 import player
 import global_var
 def action_default(self_card, player):
@@ -166,25 +167,23 @@ card_stack = []
 
 discard_pile=all_cards
  
-
+card_lock = threading.Lock()
 
 def extract_card_from_stack(): 
     global card_stack
     global discard_pile
-    if len(card_stack)==0:
-        card_stack=shuffle(discard_pile)
-        discard_pile=[]
-        # discard_pile need to be emptied here!!!   
-    cards=card_stack[0]
-    del card_stack[0]
+    with card_lock:
+        if len(card_stack)==0:
+            card_stack=shuffle(discard_pile)
+            discard_pile=[]
+            # discard_pile need to be emptied here!!!
+        cards=card_stack[0]
+        del card_stack[0]
     return cards
 
 def discard_card(c):
     global discard_pile
     discard_pile.append(c)
-
-
-
 
 def card_type_bank():
     pass
@@ -194,8 +193,6 @@ def init():
     global card_stack
     card_stack = shuffle(all_cards)
     card_stack.insert(0, card("basic","diamonds","2","peach", action=action_peach))
-    #for c in card_stack:
-    #    c.show()
 
 def main():
     init()

@@ -22,7 +22,7 @@ END_STAGE=6
 def preparation_stage(p):
     current_stage=PREPARATION_STAGE
     stage_commands=interact.valid_commands(current_stage)
-    live_players=global_var.get_value()
+    live_players=global_var.get_live_players()
     p.print("\n"+p.id+"'s turn: " )
     p.print("preparation_stage")
     interact.Show_all(p)

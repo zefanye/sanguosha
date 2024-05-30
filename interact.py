@@ -15,7 +15,7 @@ def ask_player_action(p,current_stage,stage_commands):
 #        if i != stage_commands[0]:
 #            f+=", "
 #        f+=i[0]   
-    command=input("\nPlease pick action("+f+"): ")
+    command=p.input("\nPlease pick action("+f+"): ")
     
     return interpret_command(p, command, current_stage)
 
@@ -102,7 +102,7 @@ def Discard_card(p, *args):
 def Draw_card(p, *args):
     pass
 def use_skill(p,*args):
-    skill_use=input("Enter the name of the skill you want to use: ")
+    skill_use=p.input("Enter the name of the skill you want to use: ")
     for p in skill.skill_storage(p):
         #print(p.skill_name)
         if p.skill_name==skill_use:
@@ -135,7 +135,7 @@ def Show_all(p,*args):
 
 def play_card(p, *args):
     
-    action=int(input("Play which card: "))
+    action=int(p.input("Play which card: "))
     #action=action-1
     p.play_card(action)
 

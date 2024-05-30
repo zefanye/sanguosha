@@ -24,7 +24,8 @@ def skill_storage(self):
     
     return skill_bank
 def yinghun(self):
-        global skill_bank 
+        global skill_bank
+        # Following code needs to be fixed as input can only be taking from a player
         user_choice=int(input("Choose between the two options: "))
         if user_choice==1:
             card.draw_cards(self)
