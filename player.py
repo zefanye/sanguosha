@@ -18,8 +18,7 @@ class player:
 
     def disclose_role(self):
         self.print(f"Player {self.id}''s role is {self.role}")
-        self.print("Player", self.id, "''s role is ", self.role)
-    
+     
     def restore_health(self):
         if self.life<self.life_limit:
             self.life=self.life+1

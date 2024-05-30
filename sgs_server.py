@@ -75,7 +75,7 @@ def start_server(host, port):
     while timestamp > 0 and num_connection < max_num_clients:
         try:
             conn, address = server_socket.accept()
-            except socket.timeout:
+        except socket.timeout:
             print(f"Time remaining to connect: {timestamp}s")
             timestamp -= 1
             pass
